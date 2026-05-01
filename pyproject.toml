@@ -1,16 +1,51 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
+requires = [ "setuptools>=68", "wheel" ]
 
+# Project metadata (version is read dynamically from qemcmc/__init__.py)
 [project]
 name = "qemcmc"
 version = "0.1.0"
-description = "Sparse Ising energy model and QeMCMC utilities"
+description = "QeMCMC utilities and sparse Ising energy model."
 readme = "README.md"
-requires-python = ">=3.9"
-license = { text = "MIT" }
-authors = [{ name = "John Lapeyre" }]
-dependencies = ["numpy>=1.22"]
+license = "Apache-2.0"
+authors = [ { name = "John Lapeyre" } ]
 
-[tool.setuptools.packages.find]
-where = ["src"]
+requires-python = ">=3.9"
+
+dependencies = [ "numpy>=1.22" ]
+optional-dependencies.dev = [
+  "jupytext",
+  "mypy",
+  "pytest",
+  "pytest>=8",
+  "pytest-cov",
+  "ruff",
+]
+
+[tool.setuptools]
+dynamic.version = { attr = "qemcmc.__version__" }
+# Declare asset globs to ship with the package
+package-data.qemcmc = [ "assets/graphs/*.gph" ]
+packages.find.where = [ "src" ]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+# Just for curiosity. We don't enforce this.
+[tool.mypy]
+python_version = "3.13"
+check_untyped_defs = true
+disallow_untyped_defs = true
+warn_unused_ignores = true
+no_implicit_optional = true
+
+[tool.pytest]
+ini_options.testpaths = [ "tests" ]
+
+# This is also set in jupyter.toml
+[tool.jupytext]
+default_jupytext_formats = "ipynb"
+notebook_metadata_filter = "-all"
+cell_metadata_filter = "-all"
