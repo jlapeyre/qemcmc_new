@@ -99,6 +99,7 @@ def select_ops(qc, *indices) -> QuantumCircuit:
 
     return new_qc
 
+
 # def count_map(counts: Mapping[Any, int], width: int) -> Dict[Any, int]:
 #     out: Dict[Any, int] = {}
 #     for k, v in counts.items():

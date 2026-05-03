@@ -16,6 +16,7 @@ from qemcmc.energy_model import qubo_to_ising
 def graph_file_path(filename) -> Path:
     return assets_graph_file(filename)
 
+
 @pytest.mark.parametrize("fname", ["ibm32.gph", "karate.gph"])
 def test_load_dimacs_edge_basic(fname):
     g = load_dimacs_edge(graph_file_path(fname), validate=True)

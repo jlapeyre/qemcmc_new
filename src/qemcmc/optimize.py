@@ -6,15 +6,9 @@ from qemcmc import build_proposer_qc
 from qemcmc.circuits_core import _normalize_counts_keys_to_bitstrings as _norm
 
 
-def _sample_counts(bitstr: str,
-                   model,
-                   pm,
-                   sampler,
-                   shots: int,
-                   *,
-                   gamma: float,
-                   time: int,
-                   delta_time: float) -> Dict[str, int]:
+def _sample_counts(
+    bitstr: str, model, pm, sampler, shots: int, *, gamma: float, time: int, delta_time: float
+) -> Dict[str, int]:
     """
     Build, transpile, and sample a proposer circuit for the given bitstring.
 
@@ -38,7 +32,7 @@ def _sample_counts(bitstr: str,
         job = sampler.run([isa])
     pub = job.result()[0]
     counts = pub.data.meas.get_counts()
-#    return _norm(counts, width=isa.num_qubits)
+    #    return _norm(counts, width=isa.num_qubits)
     first_key = next(iter(counts.keys()), None)
     if isinstance(first_key, str):
         width = len(first_key)
@@ -47,12 +41,9 @@ def _sample_counts(bitstr: str,
     return _norm(counts, width=width)
 
 
-
-def _metropolis_accept(e_old: float,
-                       e_new: float,
-                       *,
-                       beta: float,
-                       rng: np.random.Generator) -> bool:
+def _metropolis_accept(
+    e_old: float, e_new: float, *, beta: float, rng: np.random.Generator
+) -> bool:
     """
     Standard Metropolis acceptance rule.
 
@@ -66,21 +57,24 @@ def _metropolis_accept(e_old: float,
 
 from typing import Dict, Any, Optional, Tuple, Callable
 
-def mcmc_optimize(initial_bitstr: str,
-                  model,
-                  pm,
-                  sampler,
-                  shots: int,
-                  *,
-                  max_iters: int = 200,
-                  gamma: float = 0.5,
-                  time: int = 6,
-                  delta_time: float = 0.8,
-                  beta: float = 1.0,
-                  patience: int = 30,
-                  rng: Optional[np.random.Generator] = None,
-                  callback: Optional[Callable[[int, str, float, str, float], None]] = None,
-                  log_every: int = 10) -> Dict[str, Any]:
+
+def mcmc_optimize(
+    initial_bitstr: str,
+    model,
+    pm,
+    sampler,
+    shots: int,
+    *,
+    max_iters: int = 200,
+    gamma: float = 0.5,
+    time: int = 6,
+    delta_time: float = 0.8,
+    beta: float = 1.0,
+    patience: int = 30,
+    rng: Optional[np.random.Generator] = None,
+    callback: Optional[Callable[[int, str, float, str, float], None]] = None,
+    log_every: int = 10,
+) -> Dict[str, Any]:
     """
     Metropolis MCMC loop over proposal circuits; track and return the best energy found.
 
@@ -116,8 +110,9 @@ def mcmc_optimize(initial_bitstr: str,
     hist_E = [cur_E]
     hist_s = [cur_s]
     for it in range(1, int(max_iters) + 1):
-        counts = _sample_counts(cur_s, model, pm, sampler, shots,
-                                gamma=gamma, time=time, delta_time=delta_time)
+        counts = _sample_counts(
+            cur_s, model, pm, sampler, shots, gamma=gamma, time=time, delta_time=delta_time
+        )
         cand_s, cand_E = None, None
         for s, _cnt in counts.items():
             e = float(model.energy(s))
