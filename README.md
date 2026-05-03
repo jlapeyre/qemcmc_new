@@ -106,7 +106,7 @@ Two of the graphs that were studied in
 
 * _Quantum-enhanced Markov Chain Monte Carlo for Combinatorial Optimization_, Kate V. Marshall et. al., http://arxiv.org/abs/2602.06171
 
-Are included here:
+are included here:
 * [`assets/graphs/mammalia-kangaroo-interactions.gph`](assets/graphs/mammalia-kangaroo-interactions.gph)
 * [`assets/graphs/aves-sparrow-social.gph`](assets/graphs/aves-sparrow-social.gph)
 
@@ -122,6 +122,7 @@ Are included here:
 
 ## Notebooks
 
+- [examples/workflows/](./examples/workflows/): notebooks for workflows.
 - [examples/workflows/mis_optimize.ipynb](./examples/workflows/mis_optimize.ipynb): notebook version of the MCMC MIS optimization workflow.
 
 ## Optimization
