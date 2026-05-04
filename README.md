@@ -99,7 +99,7 @@ Set this environment variable to point to the MIS graphs files like this
 ```sh
 export QEMCMC_GRAPH_DIR="/path/to/qoblib-quantum-optimization-benchmarking-library/07-independentset/instances/"
 ```
-Then, the functions `load_dimacs_edge` and `read_dimacs_mis_energy_model`. Will search for `gph` files in this directory.
+Then, the functions `load_dimacs_edge` and `read_dimacs_mis_energy_model` will search for `gph` files in this directory.
 See the doc string for `resolve_graph_path(path)` to see the rules for resolving the path to a graph file
 
 Two of the graphs that were studied in
