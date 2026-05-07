@@ -2,8 +2,6 @@
 Circuit builders for QeMCMC-style proposals.
 
 Design
-- Pure helpers; no hidden state. Inputs/outputs are explicit.
-- Big-endian mapping: the leftmost bit s[0] maps to the highest-index qubit (n-1).
 - Problem Hamiltonian is constructed from EnergyModel.iter_terms() as Z-strings.
 - Total evolution: H_total = gamma * H_mixer + (1 - gamma) * alpha * H_problem
   with the conventional Ising sign absorbed in problem_op construction.
